@@ -2,12 +2,9 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const consign = require('consign');
 
 const app = express();
-const router = express.Router();
-
-//Carrega Rotas
-const indexRoute = require('./routes/index-route');
 
 //body-parser
 app.use(bodyParser.urlencoded({
@@ -15,6 +12,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use('/', indexRoute);
+//Auto-Load
+consign()
+    .include('src/routes')
+    .into(app);
 
 module.exports = app;

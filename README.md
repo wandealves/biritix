@@ -13,4 +13,11 @@ Nosso principal objetivo é a construção da API e da aplicação web para o ac
 - [ ] Contrução da API NodeJS para o CRUD do consumo de cerveja;
 - [ ] Construção da aplição web responsivel para o acesso do usuário;
 
+### Executar o Projeto
+
+1º - npm install -g nodemon
+2º - npm install
+3º - npm start
+4º - localhost:3000/
+
 
