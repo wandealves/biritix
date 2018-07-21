@@ -1,10 +1,7 @@
 'use strict'
 
 module.exports = app => {
-    app.get('/', (requestAnimationFrame, res, next) => {
-        res.status(200).send({
-            title: "Biritix API",
-            version: "1.0.0"
-        });
+    app.get('/', (req, res, next) => {
+        app.src.controllers.index.get(app, req, res, next);
     });
 };
