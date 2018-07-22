@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 //Auto-Load
 consign()
     .include('src/routes')
-    .then('src/controllers')
     .into(app);
 
 module.exports = app;

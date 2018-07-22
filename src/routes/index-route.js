@@ -1,7 +1,7 @@
 'use strict'
 
+const indexController = require('../controllers/index');
+
 module.exports = app => {
-    app.get('/', (req, res, next) => {
-        app.src.controllers.index.get(app, req, res, next);
-    });
+    app.get('/', indexController.get);
 };
