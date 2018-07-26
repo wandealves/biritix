@@ -1,0 +1,9 @@
+{
+    "E0001": "E-mail obrigatório",
+    "E0002": "Senha obrigatório",
+    "E0003": "E-mail inválido",
+    "E0004": "Token inválido",
+    "E0005": "Acesso restrito",
+    "E0006": "A senha deve conter entre 5 e 100 caracteres",
+    "E0007": "Falha na autenticação"
+}
