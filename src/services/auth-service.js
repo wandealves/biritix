@@ -20,13 +20,13 @@ exports.authorize = async (req, res, next) => {
 
     if (!token) {
         res.status(401).json({
-            message: message.E0005
+            message: message.erros.E0005
         });
     } else {
         jwt.verify(token, authConfig.secret, function (error, decoded) {
             if (error) {
                 res.status(401).json({
-                    message: message.E0004
+                    message: message.erros.E0004
                 });
             } else {
                 next();

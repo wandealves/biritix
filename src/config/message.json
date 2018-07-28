@@ -1,9 +1,21 @@
 {
-    "E0001": "E-mail obrigatório",
-    "E0002": "Senha obrigatório",
-    "E0003": "E-mail inválido",
-    "E0004": "Token inválido",
-    "E0005": "Acesso restrito",
-    "E0006": "A senha deve conter entre 5 e 100 caracteres",
-    "E0007": "Falha na autenticação"
+    "erros": {
+        "E0001": "E-mail obrigatório",
+        "E0002": "Senha obrigatório",
+        "E0003": "E-mail inválido",
+        "E0004": "Token inválido",
+        "E0005": "Acesso restrito",
+        "E0006": "A senha deve conter entre 5 e 100 caracteres",
+        "E0007": "Falha na autenticação",
+        "E0008": "Nome obrigatório",
+        "E0009": "Erro ao registrar",
+        "E0010": "Erro ao atualizar",
+        "E0011": "Erro ao remover",
+        "E0012": "Falha ao realizar a conexão com Database"
+    },
+    "messages": {
+        "M0001": "Registro realizado com sucesso!",
+        "M0002": "Conexão com Database realizado com sucesso!",
+        "M0003": "Registro atualizado com sucesso!"
+    }
 }
