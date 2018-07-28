@@ -2,6 +2,8 @@
 
 const authService = require('../services/auth-service');
 const message = require('../config/message');
+const validator = require('./validator/user-validator');
+const repository = require('../repositories/user-repository');
 
 exports.authenticate = async (req, res, next) => {
     try {
@@ -20,33 +22,74 @@ exports.authenticate = async (req, res, next) => {
         });
     } catch (e) {
         res.status(500).send({
-            message: message.E0007
+            message: message.erros.E0007
         });
     }
 };
 
 exports.create = async (req, res, next) => {
     try {
-        req.assert('email', message.E0001).notEmpty();
-        req.assert('email', message.E0003).isEmail();
-        req.assert('password', message.E0002).notEmpty();
-        req.assert('password', message.E0006).len(5, 100);
-        let erros = req.validationErrors();
+        let erros = validator.createValidator(req);
         if (erros) {
             res.status(400).send({
                 erros: erros
             });
             return;
         }
-        let data = req.body;
-        res.status(200).send({
-            data: {
-                data
-            }
+
+        await repository.create(req.body);
+        res.status(201).send({
+            message: message.messages.M0001
         });
+
     } catch (e) {
         res.status(500).send({
-            message: message.E0007
+            message: message.erros.E0007
+        });
+    }
+};
+
+exports.update = async(req, res, next) =>{
+    try{
+        let erros = validator.updateValidator(req);
+        if (erros) {
+            res.status(400).send({
+                erros: erros
+            });
+            return;
+        }
+
+        await repository.update(req.params.id, req.body);
+
+        res.status(200).send({
+            message: message.messages.M0003
+        });
+
+    }catch (e) {
+        res.status(500).send({
+            message: message.erros.E0010
+        });
+    }
+};
+
+exports.get = async (req, res, next) => {
+    try {
+        let data = await repository.get();
+        res.status(200).send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: message.erros.E0007
+        });
+    }
+};
+
+exports.getByEmail = async (req, res, next) => {
+    try {
+        let data = await repository.getByEmail(req.params.email);
+        res.status(200).send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: message.erros.E0007
         });
     }
 };

@@ -1,3 +1,4 @@
 {
-    "secret":"f5b99245-9876-ty67-xx77-8iug4532890u"
+    "secret":"f5b99245-9876-ty67-xx77-8iug4532890u",
+    "connectionstrings":"mongodb://root:%40sistemas123@ds050189.mlab.com:50189/node-store"
 }
