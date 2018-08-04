@@ -21,8 +21,25 @@ Nosso principal objetivo é a construção da API e da aplicação web para o ac
 * 3º  npm start
 * 4º  localhost:3000/
 
-### Feature
+### User API
 
-* feature/wr0001 - Criação do serviço de autenticação;
+* post      - [url]/api/auth
+* post      - [url]/api/user
+* put       - [url]/api/user/[id]
+* get       - [url]/api/user
+* get       - [url]/api/user/[email]
+
+### Product API
+
+* post      - [url]/api/product
+* put       - [url]/api/product/[id]
+* delete    - [url]/api/product
+* get       - [url]/api/product
+* get       - [url]/api/product/[id]
+
+### Order API
+
+* post      - [url]/api/order
+* get       - [url]/api/order
 
 

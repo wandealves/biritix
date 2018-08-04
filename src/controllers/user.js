@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const authService = require('../services/auth-service');
 const message = require('../config/message');
@@ -31,8 +31,10 @@ exports.authenticate = async (req, res, next) => {
         }
 
         const token = await authService.generateToken({
+            id: data._id,
             email: data.email,
-            name: data.name
+            name: data.name,
+            roles: data.roles
         });
 
         res.status(200).send({
@@ -57,7 +59,7 @@ exports.create = async (req, res, next) => {
             });
             return;
         }
-
+        req.body.roles = ['user'];
         await repository.create(req.body);
         res.status(201).send({
             message: message.messages.M0001

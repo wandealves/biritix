@@ -13,11 +13,22 @@
         "E0011": "Erro ao remover",
         "E0012": "Falha ao realizar a conexão com Database",
         "E0013": "Usuário não encontrado para esse e-mail e senha informada",
-        "E0014": "Senha inválida"
+        "E0014": "Senha inválida",
+        "E0015": "Falha ao obter o produto",
+        "E0016": "Falha ao obter o pedido",
+        "E0017": "Esta funcionalidade é restrita para administradores",
+        "E0018": "Houve um erro ao atualizar",
+        "E0019": "Itens de pedido não informados"
     },
     "messages": {
         "M0001": "Registro realizado com sucesso!",
         "M0002": "Conexão com Database realizado com sucesso!",
-        "M0003": "Registro atualizado com sucesso!"
+        "M0003": "Registro atualizado com sucesso!",
+        "M0004": "Produto cadastrado com sucesso!",
+        "M0005": "Produto atualizado com sucesso!",
+        "M0006": "Produto deletado com sucesso!",
+        "M0007": "Pedido cadastrado com sucesso!",
+        "M0008": "Pedido atualizado com sucesso!",
+        "M0009": "Pedido deletado com sucesso!"
     }
 }
