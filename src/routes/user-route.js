@@ -1,10 +1,11 @@
-'use strict'
-const userController = require('../controllers/user');
+'use strict';
+
+const controller = require('../controllers/user');
 
 module.exports = app =>{
-    app.post('/api/auth', userController.authenticate);
-    app.post('/api/user', userController.create);
-    app.put('/api/user/:id', userController.update);
-    app.get('/api/user', userController.get);
-    app.get('/api/user/:email', userController.getByEmail);
+    app.post('/api/auth', controller.authenticate);
+    app.post('/api/user', controller.create);
+    app.put('/api/user/:id', controller.update);
+    app.get('/api/user', controller.get);
+    app.get('/api/user/:email', controller.getByEmail);
 };

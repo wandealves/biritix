@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/app-settings');
@@ -30,6 +30,32 @@ exports.authorize = async (req, res, next) => {
                 });
             } else {
                 next();
+            }
+        });
+    }
+};
+
+exports.isAdmin = function (req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (!token) {
+        res.status(401).json({
+            message: message.erros.E0004
+        });
+    } else {
+        jwt.verify(token, authConfig.secret, function (error, decoded) {
+            if (error) {
+                res.status(401).json({
+                    message: message.erros.E0004
+                });
+            } else {
+                if (decoded.roles.includes('admin')) {
+                    next();
+                } else {
+                    res.status(403).json({
+                        message: message.erros.E0017
+                    });
+                }
             }
         });
     }
