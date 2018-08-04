@@ -11,7 +11,9 @@
         "E0009": "Erro ao registrar",
         "E0010": "Erro ao atualizar",
         "E0011": "Erro ao remover",
-        "E0012": "Falha ao realizar a conexão com Database"
+        "E0012": "Falha ao realizar a conexão com Database",
+        "E0013": "Usuário não encontrado para esse e-mail e senha informada",
+        "E0014": "Senha inválida"
     },
     "messages": {
         "M0001": "Registro realizado com sucesso!",
