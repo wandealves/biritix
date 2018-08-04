@@ -2,8 +2,13 @@
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcrypt');
 
 exports.create = async (data) => {
+
+    let hash = await bcrypt.hash(data.password, 10);
+    data.password = hash;
+
     let user = new User(data);
     await user.save();
 };
@@ -30,5 +35,22 @@ exports.getByEmail = async (email) => {
     const data = await User.findOne({
         email: email
     }, 'name email active');
+    return data;
+};
+
+exports.getUser = async (email, password) => {
+
+    const data = await User.findOne({
+        email: email,
+        active: true
+    }, 'name email password active');
+
+    if (data) {
+
+        if (!await bcrypt.compare(password, data.password)) {
+            return null;
+        }
+    }
+
     return data;
 };
