@@ -2,7 +2,7 @@
 
 const message = require('../../config/message');
 
-exports.updateValidator = (id, items) => {
+exports.update = (id, items) => {
 
     if (id === undefined || id == null) {
         return message.erros.E0018;

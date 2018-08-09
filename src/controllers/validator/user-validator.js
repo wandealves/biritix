@@ -2,7 +2,7 @@
 
 const message = require('../../config/message');
 
-exports.createValidator = (req) => {
+exports.create = (req) => {
 
     req.assert('name', message.E0008).notEmpty();
     req.assert('email', message.E0001).notEmpty();
@@ -13,7 +13,7 @@ exports.createValidator = (req) => {
     return req.validationErrors();
 };
 
-exports.updateValidator = (req) => {
+exports.update = (req) => {
 
     req.assert('name', message.E0008).notEmpty();;
     req.assert('password', message.E0002).notEmpty();
@@ -22,7 +22,7 @@ exports.updateValidator = (req) => {
     return req.validationErrors();
 };
 
-exports.authenticateValidator = (req) => {
+exports.authenticate = (req) => {
     req.assert('email', message.E0001).notEmpty();
     req.assert('email', message.E0003).isEmail();
     req.assert('password', message.E0002).notEmpty();
