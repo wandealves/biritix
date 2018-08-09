@@ -1,14 +1,13 @@
 'use strict';
 
-const repository = require('../repositories/order-repository');
-const guid = require('guid');
 const authService = require('../services/auth-service');
+const orderService = require('../services/order-service');
 const message = require('../config/message');
 const validator = require('./validator/order-validator');
 
 exports.get = async (req, res, next) => {
     try {
-        var data = await repository.get();
+        var data = await orderService.getAll();
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -20,14 +19,10 @@ exports.get = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     try {
         const token = req.body.token || req.query.token || req.headers['x-access-token'];
-        const data = await authService.decodeToken(token);
+        const user = await authService.decodeToken(token);
 
-        await repository.create({
-            description: req.body.description,
-            user: data.id,
-            number: guid.raw().substring(0, 6),
-            items: req.body.items
-        });
+        await orderService.create(req.body, user);
+
         res.status(201).send({
             message: message.messages.M0007
         });
@@ -43,7 +38,7 @@ exports.update = async (req, res, next) => {
     try {
         let id = req.params.id;
 
-        let erro = validator.updateValidator(id, req.body.items);
+        let erro = validator.update(id, req.body.items);
 
         if (erro) {
             res.status(400).send({
@@ -52,21 +47,7 @@ exports.update = async (req, res, next) => {
             return;
         }
 
-        let order = await repository.getById(id);
-        order.items.forEach(item => {
-            req.body.items.push({
-                quantity: item.quantity,
-                price: item.price,
-                product: item.product
-            });
-        });
- 
-        let quantity = req.body.items.length;
-        let total = req.body.items.reduce(function (total, item) {
-            return total + item.price;
-        }, 0);
-
-        await repository.update(id, req.body.items, total, quantity);
+        await orderService.update(id, req.body.items);
         res.status(200).send({
             message: message.messages.M0005
         });

@@ -1,11 +1,11 @@
 'use strict';
 
-const repository = require('../repositories/product-repository');
+const productService = require('../services/product-service');
 const message = require('../config/message');
 
 exports.get = async (req, res, next) => {
     try {
-        var data = await repository.get();
+        var data = await productService.getAll();
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -16,7 +16,7 @@ exports.get = async (req, res, next) => {
 
 exports.getById = async (req, res, next) => {
     try {
-        var data = await repository.getById(req.params.id);
+        var data = await productService.getById(req.params.id);
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -28,13 +28,7 @@ exports.getById = async (req, res, next) => {
 exports.create = async (req, res, next) => {
 
     try {
-
-        await repository.create({
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            active: true
-        });
+        await productService.create(req.body);
         res.status(201).send({
             message: message.messages.M0004
         });
@@ -48,7 +42,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        await repository.update(req.params.id, req.body);
+        await productService.update(req.params.id, req.body);
         res.status(200).send({
             message: message.messages.M0005
         });
@@ -61,7 +55,7 @@ exports.update = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
     try {
-        await repository.delete(req.body.id)
+        await productService.delete(req.body.id)
         res.status(200).send({
             message: message.messages.M0006
         });
