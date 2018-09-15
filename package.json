@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Projeto aberto desenvolvido em NodeJs com a finalidade de criar uma API CRUD para consumo de cerveja.",
   "main": "index.js",
+  "engines": {
+    "node": "8.9.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./bin/server"
