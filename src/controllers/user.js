@@ -1,8 +1,8 @@
 'use strict';
 
 const userService = require('../services/user-service');
-const message = require('../config/message');
 const validator = require('./validator/user-validator');
+const config = require('config');
 
 exports.get = async (req, res, next) => {
     try {
@@ -10,7 +10,7 @@ exports.get = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: message.erros.E0007
+            message: config.get('message.M0008')
         });
     }
 };
@@ -21,7 +21,7 @@ exports.getByEmail = async (req, res, next) => {
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
-            message: message.erros.E0007
+            message: config.get('message.M0008')
         });
     }
 };
@@ -46,7 +46,7 @@ exports.authenticate = async (req, res, next) => {
 
         if (!data) {
             res.status(400).send({
-                erros: message.erros.E0013
+                erros: config.get('message.M0010')
             });
             return;
         }
@@ -61,7 +61,7 @@ exports.authenticate = async (req, res, next) => {
         });
     } catch (e) {
         res.status(500).send({
-            message: message.erros.E0007
+            message: config.get('message.M0008')
         });
     }
 };
@@ -78,12 +78,12 @@ exports.create = async (req, res, next) => {
 
         await userService.create(req.body);
         res.status(201).send({
-            message: message.messages.M0001
+            message: config.get('message.M0013')
         });
 
     } catch (e) {
         res.status(500).send({
-            message: message.erros.E0009
+            message: config.get('message.M0014')
         });
     }
 };
@@ -101,12 +101,12 @@ exports.update = async (req, res, next) => {
         await userService.update(req.params.id, req.body);
 
         res.status(200).send({
-            message: message.messages.M0003
+            message: config.get('message.M0015')
         });
 
     } catch (e) {
         res.status(500).send({
-            message: message.erros.E0010
+            message: config.get('message.M0016')
         });
     }
 };

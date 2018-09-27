@@ -1,16 +1,13 @@
 'use strict';
 
 const productService = require('../services/product-service');
-const message = require('../config/message');
 
 exports.get = async (req, res, next) => {
     try {
         var data = await productService.getAll();
         res.status(200).send(data);
     } catch (e) {
-        res.status(500).send({
-            message: message.erros.E0015
-        });
+        res.status(500).send({});
     }
 };
 
@@ -19,9 +16,7 @@ exports.getById = async (req, res, next) => {
         var data = await productService.getById(req.params.id);
         res.status(200).send(data);
     } catch (e) {
-        res.status(500).send({
-            message: message.erros.E0015
-        });
+        res.status(500).send({});
     }
 };
 
@@ -29,39 +24,27 @@ exports.create = async (req, res, next) => {
 
     try {
         await productService.create(req.body);
-        res.status(201).send({
-            message: message.messages.M0004
-        });
+        res.status(201).send({});
     } catch (e) {
         console.log(e);
-        res.status(500).send({
-            message: message.erros.E0009
-        });
+        res.status(500).send({});
     }
 };
 
 exports.update = async (req, res, next) => {
     try {
         await productService.update(req.params.id, req.body);
-        res.status(200).send({
-            message: message.messages.M0005
-        });
+        res.status(200).send({});
     } catch (e) {
-        res.status(500).send({
-            message: message.erros.E0010
-        });
+        res.status(500).send({});
     }
 };
 
 exports.delete = async (req, res, next) => {
     try {
         await productService.delete(req.body.id)
-        res.status(200).send({
-            message: message.messages.M0006
-        });
+        res.status(200).send({});
     } catch (e) {
-        res.status(500).send({
-            message: message.erros.E0011
-        });
+        res.status(500).send({});
     }
 };

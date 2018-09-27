@@ -10,9 +10,10 @@ Projeto aberto desenvolvido em NodeJs com a finalidade de criar uma API CRUD par
 
 Nosso principal objetivo é a construção da API e da aplicação web para o acesso dos usuários:
 
-- [ ] Criar a api de autenticação;
-- [ ] Criar a api de registro de um novo usuário;
-- [ ] Construção da aplição web responsivel para o acesso do usuário;
+- [ X ] Criar a api de autenticação;
+- [ X ] Criar a api de registro de um novo usuário;
+- [   ] Criar a API para cadastro de bebidas;
+- [   ] Criar a API de admintração do consumo de bebidas;
 
 ### Executar o Projeto
 
