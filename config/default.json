@@ -3,7 +3,7 @@
         "secret": "f5b99245-9876-ty67-xx77-8iug4532890u"
     },
     "mongo": {
-        "connectionstrings": "mongodb://root:%40sistemas123@ds050189.mlab.com:50189/node-store"
+        "connectionstrings": ""
     },
     "message": {
         "M0001": "Conexão com Database realizado com sucesso!",
