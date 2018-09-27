@@ -1,0 +1,27 @@
+{
+    "app": {
+        "secret": "f5b99245-9876-ty67-xx77-8iug4532890u"
+    },
+    "mongo": {
+        "connectionstrings": "mongodb://root:%40sistemas123@ds050189.mlab.com:50189/node-store"
+    },
+    "message": {
+        "M0001": "Conexão com Database realizado com sucesso!",
+        "M0002": "E-mail obrigatório",
+        "M0003": "Senha obrigatório",
+        "M0004": "E-mail inválido",
+        "M0005": "Token inválido",
+        "M0006": "Acesso restrito",
+        "M0007": "A senha deve conter entre 5 e 100 caracteres",
+        "M0008": "Falha na autenticação",
+        "M0009": "Falha ao realizar a conexão com Database",
+        "M0010": "Usuário não encontrado para esse e-mail e senha informada",
+        "M0011": "Senha inválida",
+        "M0012": "Esta funcionalidade é restrita para administradores",
+        "M0013": "Usuário criado com sucesso!",
+        "M0014": "Erro ao registrar",
+        "M0015": "Usuário atualizado com sucesso!",
+        "M0016": "Erro ao atualizar",
+        "M0017": "Nome obrigatório"
+    }
+}

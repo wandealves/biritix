@@ -4,21 +4,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const consign = require('consign');
 const expressValidator = require('express-validator');
-const mongoose = require('mongoose');
-const appSettings = require('./config/app-settings');
-const message = require('./config/message');
+const mongoose = require('mongoose');;
+const config = require('config');
 
 const app = express();
 
 //Connecta ao banco nosql
-mongoose.connect(appSettings.connectionstrings, {
+mongoose.connect(config.get('mongo.connectionstrings'), {
         useNewUrlParser: true
     })
     .then(() => {
-        console.log(message.messages.M0002);
+        console.log(config.get('message.M0001'));
     })
     .catch(err => {
-        console.error(`${message.erros.E0012} ${err}`);
+        console.error(`${config.get('message.M0009')} ${err}`);
     });
 
 //body-parser

@@ -1,17 +1,16 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
-const authConfig = require('../config/app-settings');
-const message = require('../config/message');
+const jwt = require('jsonwebtoken'),
+    config = require('config');
 
 exports.generateToken = async (data) => {
-    return jwt.sign(data, authConfig.secret, {
+    return jwt.sign(data, config.get('app.secret'), {
         expiresIn: 86400
     });
 };
 
 exports.decodeToken = async (token) => {
-    let data = await jwt.verify(token, authConfig.secret);
+    let data = await jwt.verify(token, config.get('app.secret'));
     return data;
 };
 
@@ -20,13 +19,13 @@ exports.authorize = async (req, res, next) => {
 
     if (!token) {
         res.status(401).json({
-            message: message.erros.E0005
+            message: config.get('message.M0006')
         });
     } else {
-        jwt.verify(token, authConfig.secret, function (error, decoded) {
+        jwt.verify(token, config.get('app.secret'), function (error, decoded) {
             if (error) {
                 res.status(401).json({
-                    message: message.erros.E0004
+                    message: config.get('message.M0005')
                 });
             } else {
                 next();
@@ -40,20 +39,20 @@ exports.isAdmin = function (req, res, next) {
 
     if (!token) {
         res.status(401).json({
-            message: message.erros.E0004
+            message: config.get('message.M0005')
         });
     } else {
-        jwt.verify(token, authConfig.secret, function (error, decoded) {
+        jwt.verify(token, config.get('app.secret'), function (error, decoded) {
             if (error) {
                 res.status(401).json({
-                    message: message.erros.E0004
+                    message: config.get('message.M0005')
                 });
             } else {
                 if (decoded.roles.includes('admin')) {
                     next();
                 } else {
                     res.status(403).json({
-                        message: message.erros.E0017
+                        message: config.get('message.M0012')
                     });
                 }
             }
