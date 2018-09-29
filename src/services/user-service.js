@@ -8,7 +8,7 @@ exports.getAll = async () => {
 };
 
 exports.getByEmail = async (email) => {
-    return await repository.getByEmail(req.params.email);;
+    return await repository.getByEmail(email);;
 };
 
 exports.getUser = async (email, password) => {

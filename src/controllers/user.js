@@ -1,6 +1,7 @@
 'use strict';
 
 const userService = require('../services/user-service');
+const errosService = require('../services/erros-service');
 const validator = require('./validator/user-validator');
 const config = require('config');
 
@@ -9,9 +10,7 @@ exports.get = async (req, res, next) => {
         let data = await userService.getAll();
         res.status(200).send(data);
     } catch (e) {
-        res.status(500).send({
-            message: config.get('message.M0008')
-        });
+        errosService.erro_500(next, config.get('message.M0008'));
     }
 };
 
@@ -20,9 +19,7 @@ exports.getByEmail = async (req, res, next) => {
         let data = await userService.getByEmail(req.params.email);
         res.status(200).send(data);
     } catch (e) {
-        res.status(500).send({
-            message: config.get('message.M0008')
-        });
+        errosService.erro_500(next, config.get('message.M0008'));
     }
 };
 
@@ -32,9 +29,7 @@ exports.authenticate = async (req, res, next) => {
         let erros = validator.authenticate(req);
 
         if (erros) {
-            res.status(400).send({
-                erros: erros
-            });
+            errosService.erro_400(next, erros);
             return;
         }
 
@@ -45,9 +40,7 @@ exports.authenticate = async (req, res, next) => {
         let data = await userService.getUser(email, password);
 
         if (!data) {
-            res.status(400).send({
-                erros: config.get('message.M0010')
-            });
+            errosService.erro_400(next, config.get('message.M0010'));
             return;
         }
 
@@ -60,9 +53,7 @@ exports.authenticate = async (req, res, next) => {
             }
         });
     } catch (e) {
-        res.status(500).send({
-            message: config.get('message.M0008')
-        });
+        errosService.erro_500(next, config.get('message.M0008'));
     }
 };
 
@@ -70,9 +61,7 @@ exports.create = async (req, res, next) => {
     try {
         let erros = validator.create(req);
         if (erros) {
-            res.status(400).send({
-                erros: erros
-            });
+            errosService.erro_400(next, erros);
             return;
         }
 
@@ -82,9 +71,7 @@ exports.create = async (req, res, next) => {
         });
 
     } catch (e) {
-        res.status(500).send({
-            message: config.get('message.M0014')
-        });
+        errosService.erro_500(next, config.get('message.M0014'));
     }
 };
 
@@ -92,9 +79,7 @@ exports.update = async (req, res, next) => {
     try {
         let erros = validator.update(req);
         if (erros) {
-            res.status(400).send({
-                erros: erros
-            });
+            errosService.erro_400(next, erros);
             return;
         }
 
@@ -105,8 +90,6 @@ exports.update = async (req, res, next) => {
         });
 
     } catch (e) {
-        res.status(500).send({
-            message: config.get('message.M0016')
-        });
+        errosService.erro_500(next, config.get('message.M0016'));
     }
 };
