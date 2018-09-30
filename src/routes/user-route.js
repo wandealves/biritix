@@ -1,11 +1,17 @@
 'use strict';
 
-const controller = require('../controllers/user');
+const express = require('express'),
+    router = express.Router(),
+    mongoose = require('mongoose'),
+    userModel = require('../models/user'),
+    user = mongoose.model('User', userModel),
+    repository = require('../repositories/user-repository')(user),
+    controller = require('../controllers/user-controller')(repository);
 
-module.exports = app =>{
-    app.post('/api/auth', controller.authenticate);
-    app.post('/api/user', controller.create);
-    app.put('/api/user/:id', controller.update);
-    app.get('/api/user', controller.get);
-    app.get('/api/user/:email', controller.getByEmail);
-};
+router.get('/', controller.getAll.bind(controller));
+router.get('/:email', controller.getByEmail.bind(controller));
+router.post('/', controller.create.bind(controller));
+router.put('/:id', controller.update.bind(controller));
+router.post('/auth', controller.authenticate.bind(controller));
+
+module.exports = router;

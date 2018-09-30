@@ -24,23 +24,8 @@ Nosso principal objetivo é a construção da API e da aplicação web para o ac
 
 ### User API
 
-* post      - [url]/api/auth
+* post      - [url]/api/user/auth
 * post      - [url]/api/user
 * put       - [url]/api/user/[id]
 * get       - [url]/api/user
 * get       - [url]/api/user/[email]
-
-### Product API
-
-* post      - [url]/api/product
-* put       - [url]/api/product/[id]
-* delete    - [url]/api/product
-* get       - [url]/api/product
-* get       - [url]/api/product/[id]
-
-### Order API
-
-* post      - [url]/api/order
-* get       - [url]/api/order
-
-

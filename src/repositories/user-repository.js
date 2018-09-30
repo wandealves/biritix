@@ -1,55 +1,64 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
+const userModel = require('../models/user');
 
-exports.create = async (data) => {
+class UserRepository {
 
-    let hash = await bcrypt.hash(data.password, 10);
-    data.password = hash;
-    let user = new User(data);
-    await user.save();
-};
-
-exports.update = async (id, data) => {
-    await User
-        .findByIdAndUpdate(id, {
-            $set: {
-                name: data.name,
-                password: data.password,
-                active: data.active
-            }
-        });
-};
-
-exports.get = async () => {
-    const data = await User.find({
-        active: true
-    }, 'name email active roles');
-    return data;
-};
-
-exports.getByEmail = async (email) => {
-    const data = await User.findOne({
-        email: email
-    }, 'name email active roles');
-    return data;
-};
-
-exports.getUser = async (email, password) => {
-
-    const data = await User.findOne({
-        email: email,
-        active: true
-    }, 'name email password active roles');
-
-    if (data) {
-
-        if (!await bcrypt.compare(password, data.password)) {
-            return null;
-        }
+    constructor(model) {
+        this.userModel = model;
     }
 
-    return data;
+    async create(data) {
+        data.password = await bcrypt.hash(data.password, 10);
+        let user = new this.userModel(data);
+        await user.save();
+    }
+
+    async update(id, data) {
+        await this.userModel
+            .findByIdAndUpdate(id, {
+                $set: {
+                    name: data.name,
+                    password: data.password,
+                    active: data.active
+                }
+            });
+    }
+
+    async get() {
+        const data = await this.userModel.find({
+            active: true
+        }, 'name email active roles');
+        return data;
+    }
+
+    async getByEmail(email) {
+        const data = await this.userModel.findOne({
+            email: email
+        }, 'name email active roles');
+        return data;
+    }
+
+    async getUser(email, password) {
+
+        const data = await this.userModel.findOne({
+            email: email,
+            active: true
+        }, 'name email password active roles');
+
+        if (data) {
+
+            if (!bcrypt.compare(password, data.password)) {
+                return null;
+            }
+        }
+
+        return data;
+    }
+
+}
+
+module.exports = function (user) {
+    return new UserRepository(user);
 };
