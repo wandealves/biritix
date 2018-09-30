@@ -34,4 +34,4 @@ const schema = new Schema({
     }]
 });
 
-mongoose.model('User', schema);
+module.exports = schema;

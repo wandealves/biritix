@@ -1,7 +1,9 @@
 'use strict';
 
-const indexController = require('../controllers/index');
+const express = require('express'),
+    router = express.Router(),
+    controller = require('../controllers/index-controller');
 
-module.exports = app => {
-    app.get('/', indexController.get);
-};
+router.get('/', controller.getInfo);
+
+module.exports = router;
